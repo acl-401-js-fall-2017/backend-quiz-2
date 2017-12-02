@@ -6,23 +6,45 @@ describe('restaurants API', () => {
     
     beforeEach(() => mongoose.connection.dropDatabase());
 
-    const beauThai = {
-        name: 'Beau Thai',
-        address: {
-            street: '730 NW 21st Ave',
-            city: 'Portland'
+    const rawData = [
+        {
+            name: 'Beau Thai',
+            address: {
+                street: '730 NW 21st Ave',
+                city: 'Portland'
+            },
+            cuisine: 'asian',
+            review: []
         },
-        cuisine: 'asian',
-        review: []
-    };
+        {
+            name: 'Muu-Muu\'s',
+            address: {
+                street: '730 NW 21st Ave',
+                city: 'Portland'
+            },
+            cuisine: 'other',
+            review: []
+        }
+    ];
+
+    it('posts two restaurants', () => {
+        rawData.forEach((restaurant) => {
+            return request.post('/api/restaurants')
+                .send(rawData[restaurant])
+                .then(res => {
+                    const restaurant = res.body;
+                    assert.ok(restaurant._id);
+                    assert.equal(restaurant.name, rawData[i].name);
+                });});
+    });
 
     it('saves with id', () => {
         return request.post('/api/restaurants')
-            .send(beauThai)
+            .send(rawData[0])
             .then(res => {
                 const restaurant = res.body;
                 assert.ok(restaurant._id);
-                assert.equal(restaurant.name, beauThai.name);
+                assert.equal(restaurant.name, rawData[0].name);
             });
     });
 
@@ -40,17 +62,9 @@ describe('restaurants API', () => {
     });
 
     it('gets all restaurants', () => {
-        const muuMuus = {
-            name: 'Muu-Muu\'s',
-            address: {
-                street: '730 NW 21st Ave',
-                city: 'Portland'
-            },
-            cuisine: 'other',
-            review: []
-        };
+        
 
-        const posts = [beauThai, muuMuus].map(restaurant => {
+        const posts = [rawData[0], rawData[1]].map(restaurant => {
             return request.post('/api/restaurants')
                 .send(restaurant)
                 .then(res => res.body);
@@ -70,7 +84,7 @@ describe('restaurants API', () => {
     it('get by id', () => {
         let restaurant = null;
         return request.post('/api/restaurants')
-            .send(beauThai)
+            .send(rawData[0])
             .then(res => {
                 restaurant = res.body;
                 return request.get(`/api/restaurants/${restaurant._id}`);
