@@ -1,4 +1,5 @@
 const { assert } = require('chai');
+const Restaurant = require('../lib/models/restaurant'); 
 
 describe('Restaurant Model', () => {
     
