@@ -1,6 +1,5 @@
 const { assert } = require('chai');
-const Restaurant = require('../lib/models/restaurant'); 
-
+const Restaurant = require('../../lib/models/restaurant'); 
 describe('Restaurant Model', () => {
     
     it('valid model', () => {
@@ -10,8 +9,7 @@ describe('Restaurant Model', () => {
                 street: '730 NW 21st Ave',
                 city: 'Portland'
             },
-            cuisine: 'asian',
-            review: []
+            cuisine: 'asian'
         });
 
         assert.equal(restaurant.validateSync(), undefined);
