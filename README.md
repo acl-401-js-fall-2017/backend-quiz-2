@@ -8,7 +8,7 @@
     * You **need to manage your time** to have PR and last commit before deadline (remember, you can
     open PR and take advantage of travis checking your commits by pushing frequently).
 1. You may use normal resources that a software developer uses on the job (docs, google, your prior work)
-1. You will need to create your express project, you can use a template if you have one. 
+1. **You will need to create your express project**, you can use a template if you have one. 
 You may install npm packages of your choosing. 
 1. Use general best practices and common sense
     * Highly recommended to implement what is needed, no more no less
