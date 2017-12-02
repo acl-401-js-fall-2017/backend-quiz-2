@@ -28,13 +28,13 @@ describe('restaurants API', () => {
     ];
 
     it('posts two restaurants', () => {
-        rawData.forEach((restaurant) => {
+        rawData.forEach((x) => {
             return request.post('/api/restaurants')
-                .send(rawData[restaurant])
+                .send(rawData[x])
                 .then(res => {
                     const restaurant = res.body;
                     assert.ok(restaurant._id);
-                    assert.equal(restaurant.name, rawData[i].name);
+                    assert.equal(restaurant.name, rawData[x].name);
                 });});
     });
 
