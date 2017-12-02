@@ -10,8 +10,8 @@ describe('Restaurant Model', () => {
                 street: '730 NW 21st Ave',
                 city: 'Portland'
             },
-            cuisine: 'asian'
-        
+            cuisine: 'asian',
+            review: []
         });
 
         assert.equal(restaurant.validateSync(), undefined);
