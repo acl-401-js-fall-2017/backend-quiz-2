@@ -34,7 +34,7 @@ describe('Restaurants API', () => {
                 assert.deepEqual(Restaurant.name, bambooSushi.name);
             });
     });
-    
+
     it('gets all restaurants', () => {
         const allRestaurants = [bambooSushi, kensArtisanPizza];
         return Promise.all(allRestaurants.map(restaurant => {
@@ -49,5 +49,15 @@ describe('Restaurants API', () => {
                     });
             });
         
+    });
+
+    it('saves a restaurant by id', () => {
+        return request.post('/api/restaurants')
+            .send(bambooSushi)
+            .then(res => res.body)
+            .then(savedRestaurant => {
+                assert.isOk(savedRestaurant._id);
+                assert.deepEqual(savedRestaurant.name, bambooSushi.name);
+            });
     });
 });
