@@ -9,11 +9,23 @@ describe('Restaurants API', () => {
     const bambooSushi = {
         name: 'bamboo',
         cuisine: 'asian',
-        reviews: [{
-            rating: 5,
-            comments: 'very fresh',
-            email: 'kate@me.com'
-        }]
+        reviews: [
+            {
+                rating: 5,
+                comments: 'very fresh',
+                email: 'kate@me.com'
+            },
+            {
+                rating: 4,
+                comments: 'nice atmosphere',
+                email: 'gan@me.com'
+            },
+            {
+                rating: 5,
+                comments: 'gimme, gimme, gimme',
+                email: 'tav@me.com'
+            }
+        ]
     };
 
     const kensArtisanPizza = {
@@ -58,6 +70,23 @@ describe('Restaurants API', () => {
             .then(savedRestaurant => {
                 assert.isOk(savedRestaurant._id);
                 assert.deepEqual(savedRestaurant.name, bambooSushi.name);
+            });
+    });
+
+    it.skip('gets restaurants by cuisine', () => {
+        return request.get('/api/restaurants?cuisine=asian')
+            .then(res => res.body)
+            .then(restaurant => {
+                assert.deepEqual(restaurant, bambooSushi);
+            });
+    });
+
+    it.skip('gets three reviews from a restaurant', () => {
+        return request
+            .get(`/restaurants/${bambooSushi._id}`)
+            .then(res => res.body)
+            .then(restaurant => {
+                assert.equal(restaurant.reviews.length, 3);
             });
     });
 });
